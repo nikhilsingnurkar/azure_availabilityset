@@ -12,31 +12,23 @@
     register: resourcegroup_status
     when: as_rg_name is defined
 
-  - name: Check if availability set "{{ availabilityset_name }}" exist
-    azure_rm_availabilityset_facts:
-      name: "{{ availabilityset_name }}"
-      resource_group: "{{ as_rg_name }}"
-    register: availabilityset_status
-    when: availabilityset_name is defined and as_rg_name is defined
-
   - debug: var=resourcegroup_status
-  - debug: var=availabilityset_status
 
   - name: Create a resource group for availabilitySet
     azure_rm_resourcegroup:
       name: "{{ as_rg_name }}"
-      location: local
+      location: "{{ region }}"
     when: resourcegroup_status.ansible_facts.azure_resourcegroups|length <= 0 and as_rg_name is defined
 
   - name: Create an availabilitySet with "name={{ availabilityset_name }} resource_group={{ as_rg_name }} platform_update_domain_count={{ update_domain_count }} platform_fault_domain_count={{ fault_domain_count }} sku={{ sku }}"
     azure_rm_availabilityset:
       name: "{{ availabilityset_name }}"
-      location: local
+      location: "{{ region }}"
       resource_group: "{{ as_rg_name }}"
       platform_update_domain_count: "{{ update_domain_count }}"
       platform_fault_domain_count: "{{ fault_domain_count }}"
       sku: "{{ sku }}"
-    when: availabilityset_status.ansible_facts.azure_availabilitysets|length <= 0 and availabilityset_name is defined and as_rg_name is defined
+    when: availabilityset_name is defined and as_rg_name is defined
     register: created_availabilityset
 
   - debug: var=created_availabilityset.state.id
