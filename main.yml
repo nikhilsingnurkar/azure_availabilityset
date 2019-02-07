@@ -1,5 +1,14 @@
 ---
 - hosts: localhost
   connection: local
+  vars:
+    env_vars:
+      AZURE_SUBSCRIPTION_ID: "{{ azure_subscription_id }}"
+      AZURE_CLIENT_ID: "{{ azure_client_id }}"
+      AZURE_SECRET: "{{ azure_secret }}"
+      AZURE_TENANT: "{{ azure_tenant }}"
+      AZURE_CLOUD_ENVIRONMENT: "{{ azure_environment }}"
+      AZURE_CERT_VALIDATION_MODE: "ignore"
+  environment: "{{ env_vars  }}"
   roles:
      - create_availabilityset
