@@ -1,11 +1,11 @@
 ---
   - name: pwd
-    shell: ls ~
+    shell: ls /var/lib/awx/venv/azs_hv_env
     register: pwd_status
   - debug: var=pwd_status
     
   - name: load creds
-    shell: source /var/lib/awx/creds.txt
+    shell: source /var/lib/awx/venv/azs_hv_env/creds.txt
     
   - fail: msg="Bailing out. this play requires 'availabilityset_name'"
     when: availabilityset_name is not defined
