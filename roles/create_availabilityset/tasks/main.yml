@@ -1,6 +1,6 @@
 ---
-  - name: take out of load balancer pool
-    local_action: command source /var/lib/awx/creds.txt
+  - name: load creds
+    shell: source /var/lib/awx/creds.txt
     
   - fail: msg="Bailing out. this play requires 'availabilityset_name'"
     when: availabilityset_name is not defined
