@@ -1,6 +1,6 @@
 ---
   - name: pwd
-    shell: pwd
+    shell: ls ~
     register: pwd_status
   - debug: var=pwd_status
     
