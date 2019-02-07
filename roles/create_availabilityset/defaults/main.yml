@@ -1,0 +1,5 @@
+---
+# defaults file for create_availabilityset
+update_domain_count: 5
+fault_domain_count: 3
+sku: Classic
