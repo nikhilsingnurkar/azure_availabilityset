@@ -1,6 +1,8 @@
 ---
-  - name: load creds
+  - name: pwd
     shell: pwd
+    register: pwd_status
+  - debug: var=pwd-status
     
   - name: load creds
     shell: source /var/lib/awx/creds.txt
