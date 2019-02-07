@@ -2,10 +2,10 @@
 
     
   - name: load creds
-    shell: source /var/lib/awx/venv/azs_hv_env/creds.txt
+    shell: . /var/lib/awx/venv/azs_hv_env/creds.txt && echo $AZURE_SUBSCRIPTION_ID
 
   - name: pwd
-    shell: echo $AZURE_SUBSCRIPTION_ID
+    shell: . /var/lib/awx/venv/azs_hv_env/creds.txt && echo $AZURE_SUBSCRIPTION_ID
     register: shell_status
   - debug: var=shell_status
   
