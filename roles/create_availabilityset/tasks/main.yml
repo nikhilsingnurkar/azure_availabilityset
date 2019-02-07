@@ -1,13 +1,4 @@
 ---
-
-    
-  - name: load creds
-    shell: . /var/lib/awx/venv/azs_hv_env/creds.txt && echo $AZURE_SUBSCRIPTION_ID
-
-  - name: pwd
-    shell: echo $AZURE_SUBSCRIPTION_ID
-    register: shell_status
-  - debug: var=shell_status
   
   - fail: msg="Bailing out. this play requires 'availabilityset_name'"
     when: availabilityset_name is not defined
@@ -51,8 +42,3 @@
   - debug: var=created_availabilityset.state.id
   - debug: var=created_availabilityset.state.name
 
-## README
-## all custom parameters :
-## ansible-playbook create_availabilityset.yml -e "availabilityset_name=myavailabilityset as_rg_name=as_rg update_domain_count=5 fault_domain_count=3 sku=Aligned"
-## with default parameters :
-## ansible-playbook create_availabilityset.yml -e "availabilityset_name=myavailabilityset as_rg_name=as_rg"
