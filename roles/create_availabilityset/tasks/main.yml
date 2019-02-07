@@ -1,12 +1,14 @@
 ---
-  - name: pwd
-    shell: ls /var/lib/awx/venv/azs_hv_env
-    register: pwd_status
-  - debug: var=pwd_status
+
     
   - name: load creds
     shell: source /var/lib/awx/venv/azs_hv_env/creds.txt
-    
+
+  - name: pwd
+    shell: echo $AZURE_SUBSCRIPTION_ID
+    register: shell_status
+  - debug: var=shell_status
+  
   - fail: msg="Bailing out. this play requires 'availabilityset_name'"
     when: availabilityset_name is not defined
 
