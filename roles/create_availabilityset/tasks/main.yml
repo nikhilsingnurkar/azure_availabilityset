@@ -1,5 +1,8 @@
 ---
   - name: load creds
+    shell: pwd
+    
+  - name: load creds
     shell: source /var/lib/awx/creds.txt
     
   - fail: msg="Bailing out. this play requires 'availabilityset_name'"
